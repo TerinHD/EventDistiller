@@ -1,0 +1,46 @@
+# Use postgres/example user/password credentials
+version: '3.8'
+services:
+  db:
+    container_name: pg_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: event_shifter
+    ports:
+      - "5432:5432"
+    networks:
+      db_nw:
+        aliases:
+          - postgres
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    volumes:
+      - ./db/servers.json:/pgadmin4/servers.json
+      - ./db/pgpass:/pgadmin4/pgpass
+    entrypoint: >
+      sh -c "
+      cp -f /pgadmin4/pgpass /var/lib/pgadmin;
+      chmod 600 /var/lib/pgadmin/pgpass;
+      /entrypoint.sh
+      "
+    depends_on:
+      - db
+    networks:
+      db_nw:
+        aliases:
+          - pgadmin
+
+networks:
+  db_nw:
+    driver: bridge
