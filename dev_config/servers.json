@@ -1,7 +1,7 @@
 {
     "Servers": {
         "1": {
-            "Name": "EventShifter",
+            "Name": "EventDistiller",
             "Group": "Servers",
             "Host": "postgres",
             "Port": 5432,

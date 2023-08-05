@@ -1,2 +1,2 @@
-# EventShifter
+# EventDistiller
 Gencon Event Collaboration Tool

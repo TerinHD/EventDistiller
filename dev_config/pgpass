@@ -1,0 +1,2 @@
+postgres:5432:postgres:root:root
+postgres:5432:event_distiller:root:root

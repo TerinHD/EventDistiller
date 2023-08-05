@@ -1,6 +1,15 @@
 # Use postgres/example user/password credentials
 version: '3.8'
 services:
+
+  event_parser:
+    build: 
+      context: ./event_parser
+    depends_on:
+      - db
+    ports:
+    - "5000:5000"
+
   db:
     container_name: pg_container
     image: postgres
@@ -8,7 +17,7 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      POSTGRES_DB: event_shifter
+      POSTGRES_DB: event_distiller
     ports:
       - "5432:5432"
     networks:
@@ -26,8 +35,8 @@ services:
     ports:
       - "5050:80"
     volumes:
-      - ./db/servers.json:/pgadmin4/servers.json
-      - ./db/pgpass:/pgadmin4/pgpass
+      - ./dev_config/servers.json:/pgadmin4/servers.json
+      - ./dev_config/pgpass:/pgadmin4/pgpass
     entrypoint: >
       sh -c "
       cp -f /pgadmin4/pgpass /var/lib/pgadmin;
