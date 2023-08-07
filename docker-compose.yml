@@ -50,6 +50,18 @@ services:
         aliases:
           - pgadmin
 
+  sqitch:
+    container_name: sqitch_container
+    image: sqitch/sqitch
+    environment:
+      - SQITCH_ORIG_SYSUSER=terinHD
+      - SQITCH_ORIG_EMAIL=terinHD@gmail.com
+    volumes:
+      - ${pwd}/sqitch_config:/repo
+    command: help
+    depends_on:
+      - pgadmin
+
 networks:
   db_nw:
     driver: bridge
