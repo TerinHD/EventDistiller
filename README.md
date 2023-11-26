@@ -23,6 +23,20 @@ Currently, this is a mono-repo with all the components to host a local instance 
 8. Automated schedule creation based on ranking within given time parameters
 
 
+
+## Running the stack
+
+Simply ensure you have everything properly configured in the `docker-compose.yml` then run the following:
+
+```docker-compose up```
+
+# Designs
+
+## DB Tables
+In QuickDBD, a rough outline of [the table structure was created](https://app.quickdatabasediagrams.com/#/d/9eHotm).
+
+![EventDistillerDBDiagram](./readme_files/EventDistiller_Tables.png)
+
 # Dev Env
 
 ## Windows
@@ -100,3 +114,7 @@ PS > Remove-Item Alias:sqitch
 ### Powershell 6+
 PS > Remove-Alias -Name sqitch
 ```
+
+Currently this still isn't working like I would like it to... need to figure it out... 
+
+Kif Sigh Gif goes here.
